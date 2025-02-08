@@ -1,0 +1,64 @@
+/* src/styles/Login.css */
+
+/* Set the background color of the entire page */
+body {
+  background-color: rgb(124, 203, 255);
+  font-family: Arial, sans-serif;
+}
+
+/* Center the login container */
+.login-container {
+  width: 50%;
+  margin: 100px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+/* Style the heading */
+.login-container h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* Style form labels */
+.login-container label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* Style form inputs */
+.login-container input {
+  width: 97%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Style the login button */
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(124, 203, 255);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Change button color on hover */
+.login-container button:hover {
+  background-color: #328acd;
+}
+
+/* Style error message */
+.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 15px;
+}
