@@ -1,5 +1,6 @@
-/* src/styles/DishTable.css */
-
+body {
+  background-color: white;
+}
 .table-container {
   margin: 20px auto;
   width: 90%;
@@ -31,7 +32,7 @@
 }
 
 .table th {
-  background-color: #007bff;
+  background-color: #ff9800;
   color: #ffffff;
   cursor: pointer;
 }
@@ -56,7 +57,7 @@
   margin: 5px;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: #ff9800;
   color: #ffffff;
   cursor: pointer;
   font-size: 14px;
@@ -74,15 +75,58 @@
 /* DishTable.css */
 .view-icon {
   cursor: pointer;
-  color: #007bff;
+  color: #ff9800;
   font-size: 1.2em;
 }
 
 .view-icon:hover {
-  color: #0056b3;
+  color: #ff9800;
 }
 
 .multi-select .dropdown-content {
   max-height: 180px; /* Set your desired height */
   overflow-y: auto;
+}
+
+.delete-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border: 1px solid black;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.delete-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delete-popup-content p {
+  margin-bottom: 15px;
+}
+
+.delete-button-class {
+  display: flex;
+}
+
+.delete-confirm {
+  background-color: #ff9800;
+  color: white;
+  padding: 10px;
+  border: none;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.delete-cancel {
+  background-color: gray;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
 }
