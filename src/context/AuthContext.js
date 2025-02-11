@@ -1,42 +1,37 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
+import axios from "../axiosConfig";
 
-// Create the AuthContext
 export const AuthContext = createContext(null);
 
-// Custom hook to use AuthContext
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);
 
-// AuthProvider component to wrap the app
 export const AuthProvider = ({ children }) => {
-  // Load authentication state from localStorage
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem("token")
-  );
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Login function (Save token to localStorage)
-  const login = (token) => {
-    localStorage.setItem("token", token);
+  const checkAuth = async () => {
+    try {
+      await axios.get("/dishes/");
+      setIsAuthenticated(true);
+    } catch {
+      setIsAuthenticated(false);
+    }
+  };
+
+  const login = async () => {
     setIsAuthenticated(true);
   };
 
-  // Logout function (Remove token from localStorage)
-  const logout = () => {
-    localStorage.removeItem("token");
+  const logout = async () => {
+    await axios.post("/auth/logout");
     setIsAuthenticated(false);
   };
 
-  // Check localStorage on component mount
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true);
-    }
+    checkAuth();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, checkAuth }}>
       {children}
     </AuthContext.Provider>
   );

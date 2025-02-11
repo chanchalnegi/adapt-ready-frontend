@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSearch, FaSignOutAlt, FaHome } from "react-icons/fa";
 import axios from "../axiosConfig";
+import { AuthContext } from "../context/AuthContext";
 import "../styles/Header.css";
 
 const Header = ({ onSearch = () => {} }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const { logout, isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,11 +40,6 @@ const Header = ({ onSearch = () => {} }) => {
     setSearchTerm("");
     setSuggestions([]);
     navigate(`/dishes/${dishId}`);
-  };
-
-  const onLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
   };
 
   return (
@@ -79,9 +76,11 @@ const Header = ({ onSearch = () => {} }) => {
         <Link to="/dashboard" className="nav-link">
           <FaHome /> Home
         </Link>
-        <button className="logout-btn" onClick={onLogout}>
-          <FaSignOutAlt /> Logout
-        </button>
+        {isAuthenticated && (
+          <button onClick={logout} className="logout-btn">
+            <FaSignOutAlt /> Logout
+          </button>
+        )}
       </div>
     </header>
   );

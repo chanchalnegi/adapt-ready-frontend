@@ -1,16 +1,12 @@
-// src/axiosConfig.js
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:4000/",
+  baseURL: "http://localhost:4000/", // Adjust as needed
+  withCredentials: true, // Allow sending cookies with requests
 });
 
-// Request interceptor to add the Authorization header
+// Request interceptor (No need for Authorization header with cookies)
 instance.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
   return config;
 });
 
@@ -19,13 +15,8 @@ instance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 403) {
-      // Clear the token from localStorage
-      localStorage.removeItem("token");
-      // Redirect to the login page
+      // Redirect to login page on unauthorized access
       window.location.href = "/login";
-      // Alternatively, if using React Router's useNavigate:
-      // const navigate = useNavigate();
-      // navigate('/login');
     }
     return Promise.reject(error);
   }
